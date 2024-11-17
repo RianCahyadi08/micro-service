@@ -14,9 +14,6 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING,
             allowNull: false,
             unique: true,
-            validate: {
-                isEmail: true,
-            },
         },
         password: {
             type: DataTypes.STRING,
@@ -24,7 +21,7 @@ module.exports = (sequelize, DataTypes) => {
         },
         role: {
             type: DataTypes.ENUM,
-            value: ['admin', 'student'],
+            values: ['admin', 'student'],
             allowNull: false,
             defaultValue: 'student',
         },

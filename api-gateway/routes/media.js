@@ -1,9 +1,10 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
 
-/* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.send('respond with a resource media');
-});
+const mediaHandler = require('./handler/media');
+
+router.post('/', mediaHandler.create);
+router.get('/', mediaHandler.getAll);
+router.delete('/:id', mediaHandler.destroy);
 
 module.exports = router;

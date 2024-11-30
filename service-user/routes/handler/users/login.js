@@ -12,9 +12,7 @@ module.exports = async (req, res) => {
   const validate = v.validate(req.body, schema);
 
   if (validate.length > 0) {
-    return res
-      .status(400)
-      .json({ status: "error", message: validate });
+    return res.status(400).json({ status: "error", message: validate });
   }
 
   const user = await User.findOne({
@@ -22,17 +20,18 @@ module.exports = async (req, res) => {
   });
 
   if (!user) {
-    return res
-     .status(404)
-     .json({ status: "error", message: "User not found" });
+    return res.status(404).json({ status: "error", message: "User not found" });
   }
 
-  const isValidPassword = await bcrypt.compare(req.body.password, user.password);
+  const isValidPassword = await bcrypt.compare(
+    req.body.password,
+    user.password
+  );
 
   if (!isValidPassword) {
     return res
-     .status(401)
-     .json({ status: "error", message: "Invalid password" });
+      .status(401)
+      .json({ status: "error", message: "Invalid password" });
   }
 
   res.json({
@@ -44,8 +43,7 @@ module.exports = async (req, res) => {
       email: user.email,
       role: user.role,
       avatar: user.avatar,
-      profession: user.profession
+      profession: user.profession,
     },
-  })
-
+  });
 };
